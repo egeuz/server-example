@@ -1,3 +1,5 @@
+console.log("running");
+
 const input = document.getElementById("share-input");
 const button = document.getElementById("share-submit");
 const shares = document.getElementById("shares");
