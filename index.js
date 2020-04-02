@@ -5,9 +5,13 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+require('dotenv').config();
+
+
 /*** DATABASE ***/
 const mongoose = require('mongoose');
-const MONGODB_KEY = "mongodb+srv://ege:ege@cluster0-qavwt.mongodb.net/test?retryWrites=true&w=majority";
+// const MONGODB_KEY = "mongodb+srv://ege:ege@cluster0-qavwt.mongodb.net/test?retryWrites=true&w=majority";
+const MONGODB_KEY = process.env.MONGODB_KEY;
 mongoose.connect(MONGODB_KEY, { useNewUrlParser: true });
 
 /*** DATA MODEL ***/
@@ -23,7 +27,7 @@ app.post("/share-submit", (req, res) => {
     res.json(savedShare.toJSON());
   })
 });
-
+``
 /*** GET ALL USER SUBMISSIONS ***/
 app.get("/all-submissions", (req, res) => {
   Share.find({}).then((submissions) => {
@@ -32,5 +36,6 @@ app.get("/all-submissions", (req, res) => {
 });
 
 /*** CONNECTION ***/
-const PORT = 3000;
+// const PORT = 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log("server running on port " + PORT));
